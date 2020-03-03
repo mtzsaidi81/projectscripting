@@ -7,12 +7,13 @@ if [[ $zenityresult == "calculer le nombre de tous les fichiers et lexecutable" 
 
 name=$( zenity --entry --title "ARGUMENT" --text "Please enter your name:") 
 
-m=$(find /root  -type f -user  $name | wc -l) 
+m=$(find  -type f -user  $name | wc -l) 
 
-b=$(find /root -executable -user $name | wc -l)
-s=$(((($b / $m))*100))
-zenity --info \
-           --text "$s"
+b=$(find -executable -type f -user $name | wc -l)
+s="$(($m - $b))"
+echo "le nombre des fichier executable = $b"
+echo "le nombre de tous les fichiers = $m"
+echo  "hedhi feha resultat ki natr7ouhom zouz bech t3wna fil pourcentage $s"
 ./moetaz.sh
 fi
 
@@ -31,15 +32,8 @@ find  -executable -type f -user $name -exec rm
 fi
 
 if [[ $zenityresult == "afficher les details  tous les fichier executable" ]]; then 
-name=$( zenity --entry --title "ARGUMENT"  --text "Please enter your name:") 
-find /root -executable -type f -user $name | ls -l > file.txt 
-zenity --text-info  --text =cat < file.txt
+name=$( zenity --entry --title "ARGUMENT" --text "Please enter your name:") 
+find /root/home -executable -type f -user $name | ls -l > file.txt
+zenity --text-info  --text=cat < file.txt
 ./moetaz.sh
 fi
-
-if [[ $zenityresult == "afficher les details  tous les fichier executable" ]]; then 
-date < sauvegarder.txt
-$s > sauvegarder.txt
-
-fi
-
